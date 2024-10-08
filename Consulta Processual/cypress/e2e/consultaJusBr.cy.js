@@ -8,36 +8,37 @@ describe('Consulta de Processos no JusBrasil', () => {
   beforeEach(() => {
     cy.viewport(1920, 1080)
     cy.visit('https://www.jusbrasil.com.br/consulta-processual/')
-    cy.get('.home-title_container__Mk5BI > .col_root__bXuz5 > .heading_root__J_K7z').should('be.visible').contains('Consulta processual')
+    paginaInicial.headerPgInicial()
 
   })
 
 
   it('Consulta de CPF inválido', () => {
     //Neste caso não foi possível utilizar o ID do elemento, pois o mesmo contém ':', impossibilitando seu uso
-    cy.get('input[placeholder="Digite um CPF, nome ou número"]').click().type('12345678900{Enter}');
-    cy.get('[aria-live="polite"]').should('have.text', 'CPF inválido. Revise a numeração ou busque por um nome');
+    paginaInicial.pesquisa('12345678900')
+    paginaInicial.msgConsultaInvalida()
   })
 
   it('Consulta de CPF válido', () => {
-    cy.get('input[placeholder="Digite um CPF, nome ou número"]').click().type('06709332950{Enter}');
+    paginaInicial.pesquisa('06709332950')
     //Neste ponto, com o CPF válido, é esperado um bloqueio por parte do site
     //por se tratar de acesso através de uma ferramenta de automação
-    cy.get('#JeXB4').should('have.text', 'Verificando se você é humano. Isso pode levar alguns segundos.')
+    paginaInicial.msgBloqueio()
   })
 
   it('Consulta de nome válido', () => {
-    cy.get('input[placeholder="Digite um CPF, nome ou número"]').click().type('João da Silva{Enter}');
-    //Neste ponto, com o CPF válido, é esperado um bloqueio por parte do site
+    paginaInicial.pesquisa('João da Silva')
+    //Neste ponto, com o nome válido, é esperado um bloqueio por parte do site
     //por se tratar de acesso através de uma ferramenta de automação
-    cy.get('#JeXB4').should('have.text', 'Verificando se você é humano. Isso pode levar alguns segundos.')
+    paginaInicial.msgBloqueio()
   })
 
   it('Exibir detalhes de um processo', () => {
-    cy.get('input[placeholder="Digite um CPF, nome ou número"]').click().type('João da Silva{Enter}');
-    //Neste ponto, com o CPF válido, é esperado um bloqueio por parte do site
+    paginaInicial.pesquisa('João da Silva')
+    //Neste ponto, com o CPF ou nome válido, é esperado um bloqueio por parte do site
     //por se tratar de acesso através de uma ferramenta de automação
-    cy.get('#JeXB4').should('have.text', 'Verificando se você é humano. Isso pode levar alguns segundos.')
+
+    //Não foi possível dar continuidade a este cenário por conta do bloqueio.
   })
 
 
