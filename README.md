@@ -6,7 +6,7 @@
 * **Clonando o Repositório:**
     * Clonar o repositório https://github.com/mathnm/tstauto-consulta-processual.git.
 * **Instalando Dependências:**
-    * Instalar Cypress na pasta do projeto (tstauto-consulta-processual\Consulta Processual) (`npm install cypress`).
+    * Se necessário, instalar Cypress na pasta do projeto (tstauto-consulta-processual\Consulta Processual) (`npm install cypress`).
 * **Executando o Projeto:**
     * Abrir a pasta do projeto (tstauto-consulta-processual\Consulta Processual) pelo terminal e rodar o comando (`npx cypress run`).
 * **Verificando resultados:**
